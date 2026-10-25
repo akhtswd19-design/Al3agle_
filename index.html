@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر العاقل</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 70px;
+        }
+        /* شاشة الترحيب لمدة 4 ثوانٍ */
+        #splash-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #0d1117;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeOut 0.5s ease 3.5s forwards;
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+        .splash-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #58a6ff;
+            letter-spacing: 1px;
+        }
+        .container {
+            padding: 15px;
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+        .card {
+            background: #21262d;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .btn {
+            background-color: #238636;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        /* شريط التنقل السفلي */
+        .nav-bar {
+            position: fixed;
+            bottom: 0; left: 0; width: 100%;
+            background-color: #161b22;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px: #30363d;
+        }
+        .nav-item {
+            background: none;
+            border: none;
+            color: #8b949e;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .nav-item.active {
+            color: #58a6ff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شاشة الترحيب (4 ثوانٍ) -->
+    <div id="splash-screen">
+        <div class="splash-title">متجر العاقل</div>
+    </div>
+
+    <div class="container">
+        <!-- الصفحة الأولى: المنتجات -->
+        <div id="page-products" class="page active">
+            <h2>📦 الملفات العسكرية</h2>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9" alt="منتج">
+                <h3>ملفات الاستخبارات العسكرية</h3>
+                <p>ملفات سرية ومهمة للتحليل العسكري</p>
+                <p><strong>السعر: 50 ر.س (🌟 100 نجمة)</strong></p>
+                <button class="btn" onclick="buyProduct('https://t.me/+example_group_link')">شراء بالنجوم 🌟</button>
+            </div>
+        </div>
+
+        <!-- الصفحة الثانية: تقييمات العملاء -->
+        <div id="page-reviews" class="page">
+            <h2>⭐ تقييمات العملاء</h2>
+            <div class="card">
+                <p><strong>أبو فهد:</strong> متجر ممتاز وملفات دقيقة جداً!</p>
+                <p style="color: gold;">⭐⭐⭐⭐⭐</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- شريط التنقل السفلي -->
+    <div class="nav-bar">
+        <button class="nav-item active" onclick="switchPage('products', this)">
+            <span>📦</span> المنتجات
+        </button>
+        <button class="nav-item" onclick="switchPage('reviews', this)">
+            <span>⭐</span> التقييمات
+        </button>
+    </div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+
+        function switchPage(pageName, btn) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            
+            document.getElementById('page-' + pageName).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        function buyProduct(groupLink) {
+            if(confirm("هل تريد إتمام الشراء باستخدام نجوم تيليجرام؟")) {
+                alert("تم الدفع بنجاح! رابط قروب الملفات هو:\n" + groupLink);
+                window.open(groupLink, '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
