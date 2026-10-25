@@ -6,7 +6,7 @@ TOKEN = "8622474758:AAFcIwB0EOHK1luEnYig6yxE4ZxmbU0XOxo"
 ADMIN_ID = 1056007305
 URL = f"https://api.telegram.org/bot{TOKEN}"
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 
 def send_message(chat_id, text, reply_markup=None):
